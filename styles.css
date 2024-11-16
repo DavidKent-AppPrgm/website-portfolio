@@ -49,12 +49,6 @@ td {
 /*
 This will create a faint glow around the cursor. This is used with mouseglow.js
 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 #glow {
     position: fixed;
     width: 600px;
