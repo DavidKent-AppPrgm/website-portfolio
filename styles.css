@@ -1,76 +1,30 @@
+
+body {
+  background-color: black;
+  margin-left: 40px;
+}
+
+nav {
+  margin-top: 20px;
+}
+
 h1 {
-  color: blue;
-}
-
-
-a:link {
-  color: green;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:visited {
-  color: purple;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:hover {
-  color: red;
-  background-color: transparent;
-  text-decoration: underline;
-}
-
-a:active {
-  color: yellow;
-  background-color: transparent;
-  text-decoration: underline;
-}
-
-/*
-a:link, a:visited {
-  background-color: #f44336;
   color: white;
-  padding: 15px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+  font-size: 48px;
+  font-style: bold;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 40px;
 }
 
-a:hover, a:active {
-  background-color: red;
-}
-*/
-
-
-table {
-border-spacing: 30px;
-border: 1px solid black;
+h2, h3, h4, h5, h6 {
+  color: white;
+  font-size: 18px;
+  font-style: bold;
+  font-family: 'Poppins', sans-serif;
 }
 
-th, td {
-border: 1px solid black;
-border-collapse: collapse;
-padding: 15px;
-}
-
-tr:nth-child(3n) {
-  background-color: #D6EEEE;
-}
-
-
-li {
-  float: left;
-  display: block;
-  padding: 16px;
-  list-style-type: disc;
-}
-
-.mycontainer {
-  width:100%;
-  overflow:auto;
-}
-.mycontainer div {
-  width:33%;
-  float:left;
+p {
+  color: #AFAFAF;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
 }
