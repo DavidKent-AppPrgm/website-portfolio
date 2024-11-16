@@ -1,5 +1,6 @@
 
 body {
+  height: 200vh; /* Added extra height for scroll testing */
   background-color: #000000;
   margin-left: 40px;
   margin-right: 40px;
@@ -43,4 +44,24 @@ td {
   vertical-align: top;
   spacing: 20px;
   padding-left: 64px;
+}
+
+/*
+This will create a faint glow around the cursor. This is used with mouseglow.js
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(20px);
+    transform: translate(-50%, -50%);
 }
