@@ -47,15 +47,24 @@ td {
 }
 
 /*
+This will deconstruct the table on phones to fit the screen
+*/
+@media (max-width: 768px) {
+  .responsive-table table {
+    display: block;
+  }
+}
+
+/*
 This will create a faint glow around the cursor. This is used with mouseglow.js
 */
 #glow {
     position: fixed;
-    width: 600px;
-    height: 600px;
+    width: 900px;
+    height: 900px;
     border-radius: 50%;
     pointer-events: none;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
-    filter: blur(20px);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(40px);
     transform: translate(-50%, -50%);
 }
