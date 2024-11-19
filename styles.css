@@ -31,13 +31,17 @@ p {
   font-family: 'Poppins', sans-serif;
 }
 
-/* Default desktop view */
-.responsive-table table {
+/* Default desktop view ------------------------------------------------------*/
+.mobile-view {
+  display: none;
+}
+
+.desktop-view {
   width: 100%;
   border-collapse: collapse;
 }
 
-.responsive-table th {
+.desktop-view th {
   vertical-align: top;
   text-align: left;
   font-size: 16px;
@@ -46,44 +50,23 @@ p {
   padding: 10px 20px;
 }
 
-.responsive-table td {
+.desktop-view td {
   vertical-align: top;
   padding: 10px 64px;
 }
 
-/* Mobile view */
+/* Mobile view ---------------------------------------------------------------*/
 @media (max-width: 768px) {
-  .responsive-table table {
+  .desktop-view {
+    display: none;
+  }
+
+  .mobile-view {
     display: block;
-  }
-
-  .responsive-table tr {
-    display: block;
-    margin-bottom: 20px;
-  }
-
-  .responsive-table th,
-  .responsive-table td {
-    display: block;
-    text-align: left;
-    padding: 10px 0;
-    width: 100%;
-  }
-
-  .responsive-table th {
-    font-weight: bold;
-    color: #333;
-    padding-left: 0;
-  }
-
-  .responsive-table td {
-    padding-left: 0;
   }
 }
 
-/*
-This will create a faint glow around the cursor. This is used with mouseglow.js
-*/
+/* This will create a faint glow around the cursor. This is used with mouseglow.js */
 #glow {
     position: fixed;
     width: 900px;
