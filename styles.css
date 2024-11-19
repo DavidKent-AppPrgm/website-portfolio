@@ -31,27 +31,53 @@ p {
   font-family: 'Poppins', sans-serif;
 }
 
-th {
+/* Default desktop view */
+.responsive-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.responsive-table th {
   vertical-align: top;
   text-align: left;
   font-size: 16px;
   font-weight: normal;
   width: 128px;
-  spacing: 20px;
+  padding: 10px 20px;
 }
 
-td {
+.responsive-table td {
   vertical-align: top;
-  spacing: 20px;
-  padding-left: 64px;
+  padding: 10px 64px;
 }
 
-/*
-This will deconstruct the table on phones to fit the screen
-*/
+/* Mobile view */
 @media (max-width: 768px) {
   .responsive-table table {
     display: block;
+  }
+
+  .responsive-table tr {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .responsive-table th,
+  .responsive-table td {
+    display: block;
+    text-align: left;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .responsive-table th {
+    font-weight: bold;
+    color: #333;
+    padding-left: 0;
+  }
+
+  .responsive-table td {
+    padding-left: 0;
   }
 }
 
