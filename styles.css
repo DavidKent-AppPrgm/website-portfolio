@@ -31,10 +31,15 @@ p {
   font-family: 'Poppins', sans-serif;
 }
 
+.bold-white {
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
 .exp-dates {
   font-size: 18px;
   font-weight: normal;
-  color: #AAAAAA;
+  color: #FFFFFF;
 }
 
 /* Default desktop view ------------------------------------------------------*/
