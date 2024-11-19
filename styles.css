@@ -37,6 +37,7 @@ p {
 }
 
 .desktop-view {
+  display: table;
   width: 100%;
   border-collapse: collapse;
 }
@@ -46,13 +47,13 @@ p {
   text-align: left;
   font-size: 16px;
   font-weight: normal;
+  color: #AAAAAA;
   width: 128px;
-  padding: 10px 20px;
+  padding-top: 20px;
 }
 
 .desktop-view td {
   vertical-align: top;
-  padding: 10px 64px;
 }
 
 /* Mobile view ---------------------------------------------------------------*/
