@@ -85,6 +85,10 @@ footer {
   color: #FFFFFF;
 }
 
+.mobile-job-entry {
+  padding-top: 35px;
+}
+
 /* Default desktop view ------------------------------------------------------*/
 .mobile-view {
   display: none;
