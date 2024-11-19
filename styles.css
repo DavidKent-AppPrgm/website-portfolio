@@ -31,6 +31,12 @@ p {
   font-family: 'Poppins', sans-serif;
 }
 
+.exp-dates {
+  font-size: 18px;
+  font-weight: normal;
+  color: #AAAAAA;
+}
+
 /* Default desktop view ------------------------------------------------------*/
 .mobile-view {
   display: none;
@@ -45,11 +51,9 @@ p {
 .desktop-view th {
   vertical-align: top;
   text-align: left;
-  font-size: 16px;
-  font-weight: normal;
-  color: #AAAAAA;
   width: 128px;
   padding-top: 20px;
+  padding-right: 200px;
 }
 
 .desktop-view td {
