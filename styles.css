@@ -102,10 +102,12 @@ footer {
   width: 128px;
   padding-top: 20px;
   padding-right: 200px;
+  padding-top: 50px;
 }
 
 .desktop-view td {
   vertical-align: top;
+  padding-top: 35px;
 }
 
 @media (min-width: 1200px) {
