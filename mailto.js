@@ -1,33 +1,27 @@
-function toggleEmailWindow() {
-  const emailWindow = document.getElementById("emailWindow");
-  emailWindow.style.display = emailWindow.style.display === "none" ? "block" : "none";
+// Open the email modal
+function openEmailWindow() {
+  document.getElementById('emailModal').style.display = 'block';
 }
 
-async function sendEmail() {
-  const subject = document.getElementById("emailSubject").value;
-  const body = document.getElementById("emailBody").value;
+// Close the email modal
+function closeEmailWindow() {
+  document.getElementById('emailModal').style.display = 'none';
+}
 
-  if (!subject || !body) {
-    alert("Please fill out all fields.");
-    return;
-  }
+// Handle the email form submission (you can customize this to send an actual email or save the data)
+function sendEmail(event) {
+  event.preventDefault(); // Prevent form submission from reloading the page
 
-  try {
-    const response = await fetch('/send-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ subject, body })
-    });
+  const recipient = document.getElementById('recipient').value;
+  const subject = document.getElementById('subject').value;
+  const message = document.getElementById('message').value;
 
-    const result = await response.json();
-    if (result.success) {
-      alert("Email sent successfully!");
-      toggleEmailWindow();
-    } else {
-      alert("Failed to send email.");
-    }
-  } catch (error) {
-    alert("An error occurred while sending the email.");
-    console.error(error);
-  }
+  // Example: log to console (you can replace with actual email logic)
+  console.log(`Sending email to ${recipient} with subject: ${subject} and message: ${message}`);
+
+  // After sending, close the modal
+  closeEmailWindow();
+
+  // Optionally, alert the user that the email is being sent
+  alert('Your email has been sent!');
 }

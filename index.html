@@ -7,11 +7,12 @@
     <title>David Kent</title>
     <link rel="icon" type="image/x-icon" href="" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="mouseglow.js"></script>
+    <script src="mailto.js"></script>
   </head>
 
   <body>
     <div id="glow"></div>
-    <script src="mouseglow.js"></script>
 
     <div class="container">
     <!-- Left Column -->
@@ -26,9 +27,26 @@
         <button onclick="window.open('https://www.linkedin.com/in/david-kent-3b6274172', '_blank')" title="David Kent's LinkedIn Page" style="background-color:transparent;border:none;">
           <img src="LinkedIn_logo_initials.png" alt="LinkedIn" style="width: 40px; height: 40px;">
         </button>
-        <button onclick="window.location.href='mailto:davjkent@gmail.com';" title="David Kent's Email" style="background-color:transparent;border:none;">
+        <button onclick="openEmailWindow()" title="David Kent's Email" style="background-color:transparent;border:none;">
           <img src="Gmail_Icon.png" alt="Gmail" style="width: 40px; height: 40px;">
         </button>
+      </div>
+
+      <!-- Email Modal -->
+      <div id="emailModal" class="email-modal">
+        <div class="email-modal-content">
+          <span class="email-close-btn" onclick="closeEmailWindow()">&times;</span>
+          <h2>Send an Email</h2>
+          <form id="emailForm">
+            <label for="recipient">To:</label>
+            <input type="email" id="recipient" value="your-email@example.com" readonly><br><br>
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" placeholder="Subject"><br><br>
+            <label for="message">Message:</label><br>
+            <textarea id="message" rows="4" cols="30" placeholder="Write your message..."></textarea><br><br>
+            <button type="submit" onclick="sendEmail(event)">Send</button>
+          </form>
+        </div>
       </div>
 
       <nav class="nav-display">
