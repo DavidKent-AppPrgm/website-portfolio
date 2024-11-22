@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 const oauth2Client = new OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  'https://davidkent-appprgm.github.io/website-portfolio/'  // Redirect URL
+  'https://developers.google.com/oauthplayground'  // Redirect URL
 );
 
 // Set credentials with the refresh token
