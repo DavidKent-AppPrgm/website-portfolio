@@ -1,23 +1,16 @@
 //mailer.js
-// Opens the email modal
 function openEmailWindow() {
   const emailModal = document.getElementById('emailModal');
   emailModal.style.display = 'block'; // Make modal visible
   setTimeout(() => {
-    emailModal.classList.add('show'); // Add "show" class for smooth transition
+    emailModal.classList.add('show'); // Add the show class after a slight delay for transition
   }, 10);
 }
 
-// Closes the email modal
 function closeEmailWindow() {
-  const emailModal = document.getElementById('emailModal');
-  emailModal.classList.remove('show'); // Remove "show" class
-  setTimeout(() => {
-    emailModal.style.display = 'none'; // Hide modal after transition
-  }, 300);
+  document.getElementById('emailModal').style.display = 'none';
 }
 
-// Sends the email
 function sendEmail(event) {
   event.preventDefault(); // Prevent form submission from reloading the page
 
@@ -25,7 +18,7 @@ function sendEmail(event) {
   const subject = document.getElementById('subject').value;
   const message = document.getElementById('message').value;
 
-  // Make POST request to the server
+  // Make a POST request to the server to send the email
   fetch('/send-email', {
     method: 'POST',
     headers: {
@@ -37,17 +30,20 @@ function sendEmail(event) {
       message: message,
     }),
   })
-    .then((response) => {
-      if (response.ok) {
-        alert('Email sent successfully!');
-      } else {
-        alert('Failed to send email.');
-      }
-    })
-    .catch((error) => {
-      console.error('Error sending email:', error);
-      alert('Error sending email.');
-    });
+  .then(response => {
+    if (response.ok) {
+      alert('Email sent successfully!');
+    } else {
+      alert('Failed to send email');
+    }
+  })
+  .catch(error => {
+    console.error('Error sending email:', error);
+    alert('Error sending email');
+  });
 
   closeEmailWindow();
+
+  // Submit message alert
+  alert('Your email has been sent!');
 }
