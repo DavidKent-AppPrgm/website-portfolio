@@ -11,18 +11,24 @@ function closeEmailWindow() {
   document.getElementById('emailModal').style.display = 'none';
 }
 
-function sendEmail(event) {
+async function sendEmail(event) {
   event.preventDefault(); // Prevent form submission from reloading the page
 
   const sender = document.getElementById('sender').value;
   const subject = document.getElementById('subject').value;
   const message = document.getElementById('message').value;
 
+  // Get the CSRF token from the server
+  const csrfResponse = await fetch('/csrf-token');
+  const csrfData = await csrfResponse.json();
+  const csrfToken = csrfData.csrfToken;
+
   // Make a POST request to the server to send the email
   fetch('/send-email', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'CSRF-Token': csrfToken, // Include the CSRF token in the request header
     },
     body: JSON.stringify({
       sender: sender,
@@ -43,7 +49,4 @@ function sendEmail(event) {
   });
 
   closeEmailWindow();
-
-  // Submit message alert
-  alert('Your email has been sent!');
 }

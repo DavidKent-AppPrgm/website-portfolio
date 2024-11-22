@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
 const OAuth2 = google.auth.OAuth2;
+const csrf = require('csurf');  // Import the csrf module
+const cookieParser = require('cookie-parser'); // Import cookie-parser to parse cookies
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,11 +14,17 @@ const port = process.env.PORT || 3000;
 // Set up body parser for JSON data
 app.use(bodyParser.json());
 
+// Use cookie-parser middleware for reading cookies (important for CSRF)
+app.use(cookieParser());
+
+// Set up csrf middleware
+const csrfProtection = csrf({ cookie: true }); // Enable CSRF protection with cookies
+
 // Set up OAuth2 Client
 const oauth2Client = new OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  'https://developers.google.com/oauthplayground'  // Redirect URL
+  'https://davidkent-appprgm.github.io/website-portfolio/'  // Redirect URL
 );
 
 // Set credentials with the refresh token
@@ -40,8 +48,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Serve the CSRF token to the front-end
+app.get('/csrf-token', csrfProtection, (req, res) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
+
 // Handle the POST request to send an email
-app.post('/send-email', (req, res) => {
+app.post('/send-email', csrfProtection, (req, res) => {  // Apply CSRF protection here
   const { sender, subject, message } = req.body;  // Get form data from request body
 
   const mailOptions = {
@@ -59,6 +72,25 @@ app.post('/send-email', (req, res) => {
     }
     console.log('Email sent:', info.response);
     res.status(200).send('Email sent successfully');
+  });
+});
+
+// OAuth2 callback route
+app.get('/auth/callback', (req, res) => {
+  const { code } = req.query;
+
+  // Get the access token using the authorization code
+  oauth2Client.getToken(code, (error, tokens) => {
+    if (error) {
+      console.error('Error during OAuth callback:', error);
+      return res.status(500).send('Failed to authenticate');
+    }
+
+    // Set the credentials for future requests
+    oauth2Client.setCredentials(tokens);
+
+    // Redirect to home or success page
+    res.redirect('https://davidkent-appprgm.github.io/website-portfolio');
   });
 });
 

@@ -13,6 +13,7 @@
   <body>
     <div id="glow"></div>
     <script src="mouseglow.js"></script>
+    <script src="authCallback.js"></script>
 
     <div class="container">
     <!-- Left Column -->
@@ -22,6 +23,10 @@
         <h2>Full-Stack Developer</h2>
         <p>I create dynamic and responsive digital experiences, <br>from games to web applications.</p>
       </header>
+
+      <button onclick="window.location.href='https://accounts.google.com/o/oauth2/v2/auth?scope=email&access_type=offline&response_type=code&redirect_uri=https://davidkent-appprgm.github.io/website-portfolio/auth/callback&client_id=YOUR_GOOGLE_CLIENT_ID'" title="Login with Google">
+          Login with Google
+      </button>
 
       <div style="margin-top:40px;">
         <button onclick="window.open('https://www.linkedin.com/in/david-kent-3b6274172', '_blank')" title="David Kent's LinkedIn Page" style="background-color:transparent;border:none;">
@@ -51,9 +56,9 @@
       </div>
 
       <nav class="nav-display">
-        <a href="#section-about">About<a/><br /><br />
-        <a href="#section-experience">Experience<a/><br /><br />
-        <a href="#section-projects">Projects<a/>
+        <a href="#section-about">About</a><br /><br />
+        <a href="#section-experience">Experience</a><br /><br />
+        <a href="#section-projects">Projects</a>
       </nav>
     </div>
 
