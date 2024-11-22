@@ -14,6 +14,8 @@ function closeEmailWindow() {
 async function sendEmail(event) {
   event.preventDefault(); // Prevent form submission from reloading the page
 
+  alert("sendEmail triggered");
+
   const sender = document.getElementById('sender').value;
   const subject = document.getElementById('subject').value;
   const message = document.getElementById('message').value;
