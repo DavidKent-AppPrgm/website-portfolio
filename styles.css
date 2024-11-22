@@ -181,31 +181,27 @@ footer {
 
 /* Email Modal Handler */
 .email-modal {
-  display: none; /* Hidden by default */
+  display: none; /* Hidden initially */
   position: fixed;
-  bottom: 10px;
-  left: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
   border-radius: 8px;
-  z-index: 9999;
+  z-index: 9999; /* Ensure window is on top */
 }
 
 .email-modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
 .email-close-btn {
-  color: #aaa;
-  font-size: 28px;
-  font-weight: bold;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  font-size: 24px;
   cursor: pointer;
+  align-self: flex-end;
 }
 
 .email-close-btn:hover,
