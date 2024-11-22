@@ -27,26 +27,47 @@ const oauth2Client = new OAuth2(
   'https://davidkent-appprgm.github.io/website-portfolio/'  // Redirect URL
 );
 
-// Set credentials with the refresh token
+// Store the refresh token in an environment variable or database
 oauth2Client.setCredentials({
   refresh_token: process.env.GOOGLE_REFRESH_TOKEN
 });
 
-// Get the access token
-const accessToken = oauth2Client.getAccessToken();
+// Function to get a new access token using the refresh token
+async function getNewAccessToken() {
+  try {
+    const { tokens } = await oauth2Client.refreshAccessToken();
+    oauth2Client.setCredentials(tokens); // Set the new access token
+    console.log('New Access Token:', tokens.access_token);
+    return tokens.access_token;
+  } catch (error) {
+    console.error('Error refreshing access token:', error);
+  }
+}
+
+// Example of how to check and refresh token if needed
+async function checkAndRefreshToken() {
+  const accessToken = oauth2Client.credentials.access_token;
+  if (!accessToken) {
+    await getNewAccessToken();
+  }
+  return oauth2Client.credentials.access_token;
+}
 
 // Create Nodemailer transporter using Gmail API
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    type: 'OAuth2',
-    user: process.env.GMAIL_USER,
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
-    accessToken: accessToken,
-  },
-});
+async function createTransporter() {
+  const accessToken = await checkAndRefreshToken(); // Ensure the token is valid
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      type: 'OAuth2',
+      user: process.env.GMAIL_USER,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+      accessToken: accessToken,
+    },
+  });
+}
 
 // Serve the CSRF token to the front-end
 app.get('/csrf-token', csrfProtection, (req, res) => {
@@ -54,25 +75,31 @@ app.get('/csrf-token', csrfProtection, (req, res) => {
 });
 
 // Handle the POST request to send an email
-app.post('/send-email', csrfProtection, (req, res) => {  // Apply CSRF protection here
+app.post('/send-email', csrfProtection, async (req, res) => {  // Apply CSRF protection here
   const { sender, subject, message } = req.body;  // Get form data from request body
 
-  const mailOptions = {
-    from: sender,
-    to: process.env.GMAIL_USER,
-    subject: subject,
-    text: message,
-  };
+  try {
+    const transporter = await createTransporter();
+    const mailOptions = {
+      from: sender,
+      to: process.env.GMAIL_USER,
+      subject: subject,
+      text: message,
+    };
 
-  // Send the email using Nodemailer
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email:', error);
-      return res.status(500).send('Failed to send email');
-    }
-    console.log('Email sent:', info.response);
-    res.status(200).send('Email sent successfully');
-  });
+    // Send the email using Nodemailer
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Error sending email:', error);
+        return res.status(500).send('Failed to send email');
+      }
+      console.log('Email sent:', info.response);
+      res.status(200).send('Email sent successfully');
+    });
+  } catch (error) {
+    console.error('Error creating transporter:', error);
+    res.status(500).send('Failed to create transporter');
+  }
 });
 
 // OAuth2 callback route
