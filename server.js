@@ -1,42 +1,55 @@
+//server.js
+require('dotenv').config();
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 
 const app = express();
-app.use(cors());
+const port = process.env.PORT || 3000;
+
+// Middleware to parse JSON body
 app.use(bodyParser.json());
 
-// Configure Nodemailer
-const transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: 'your-email@gmail.com',
-    pass: 'your-email-password', // Use app-specific password if needed
-  },
-});
-
-// Email Sending Endpoint
+// Endpoint to send email
 app.post('/send-email', (req, res) => {
-  const { subject, body } = req.body;
+  const { sender, subject, message } = req.body;
 
+  // Validate required fields
+  if (!sender || !subject || !message) {
+    return res.status(400).send('Missing required fields');
+  }
+
+  // Configure nodemailer
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
+    },
+  });
+
+  // Mail options
   const mailOptions = {
-    from: 'your-email@gmail.com',
-    to: 'your-email@gmail.com',
-    subject: subject,
-    text: body,
+    from: process.env.GMAIL_USER,
+    to: process.env.GMAIL_USER,
+    replyTo: sender,
+    subject: `New Message from ${sender}: ${subject}`,
+    text: `You received a new message from ${sender}:\n\n${message}`,
   };
 
+  // Send email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error(error);
-      return res.status(500).send({ success: false, error });
+      console.error('Error sending email:', error);
+      res.status(500).send('Failed to send email');
+    } else {
+      console.log('Email sent:', info.response);
+      res.status(200).send('Email sent successfully');
     }
-    res.send({ success: true });
   });
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
