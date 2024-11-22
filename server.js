@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 const oauth2Client = new OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  'https://developers.google.com/oauthplayground'  // Redirect URL
+  'https://davidkent-appprgm.github.io/website-portfolio/'  // Redirect URL
 );
 
 // Set credentials with the refresh token
@@ -32,7 +32,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     type: 'OAuth2',
-    user: process.env.GMAIL_USER,  // Your Gmail address
+    user: process.env.GMAIL_USER,
     clientId: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
@@ -45,8 +45,8 @@ app.post('/send-email', (req, res) => {
   const { sender, subject, message } = req.body;  // Get form data from request body
 
   const mailOptions = {
-    from: sender,  // User's email (from input in the form)
-    to: process.env.GMAIL_USER,  // Your email (to receive the message)
+    from: sender,
+    to: process.env.GMAIL_USER,
     subject: subject,
     text: message,
   };
