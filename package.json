@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "googleapis": "^139.0.0",
-    "csurf": "^1.11.0"
+    "csurf": "^1.11.0",
+    "cookie-parser": "^1.4.6"
   }
 }
