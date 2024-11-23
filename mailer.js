@@ -14,8 +14,6 @@ function closeEmailWindow() {
 async function sendEmail(event) {
   event.preventDefault(); // Prevent form submission from reloading the page
 
-  alert("sendEmail triggered");
-
   const sender = document.getElementById('sender').value;
   const subject = document.getElementById('subject').value;
   const message = document.getElementById('message').value;
@@ -24,6 +22,8 @@ async function sendEmail(event) {
   const csrfResponse = await fetch('/csrf-token');
   const csrfData = await csrfResponse.json();
   const csrfToken = csrfData.csrfToken;
+
+  alert("sendEmail triggered 2");
 
   // Make a POST request to the server to send the email
   fetch('/send-email', {
