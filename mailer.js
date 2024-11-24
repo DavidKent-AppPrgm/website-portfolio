@@ -23,6 +23,8 @@ async function sendEmail(event) {
   const csrfData = await csrfResponse.json();
   const csrfToken = csrfData.csrfToken;
 
+  alert('Email sending');
+
   // Make a POST request to the server to send the email
   fetch('/send-email', {
     method: 'POST',
