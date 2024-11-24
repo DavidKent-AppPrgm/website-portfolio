@@ -21,15 +21,17 @@ async function sendEmail(event) {
   const subject = document.getElementById('subject').value; // Subject of email
   const message = document.getElementById('message').value; // Message content
 
-  if (!sender || !validateEmail(sender)) {
+  if (!sender || !subject || !message) {
+    alert('Please provide all required fields.');
+    return;
+  }
+
+  if (!validateEmail(sender)) {
     alert('Please enter a valid From email');
     return;
   }
 
-  if (!subject || !message) {
-    alert("Please fill in both the subject and message.");
-    return;
-  }
+  console.log('Sending email with data:', { sender, subject, message });
 
   // Get the CSRF token from the server to include it in the request headers
   const csrfResponse = await fetch('https://website-portfolio-dl6i.onrender.com/csrf-token', {  // Use full URL here
