@@ -7,6 +7,11 @@ const cors = require('cors');  // Import CORS middleware
 const app = express();
 const port = process.env.PORT || 10000;
 
+alert('GOOGLE_CLIENT_ID', process.env.GOOGLE_CLIENT_ID);
+alert('GOOGLE_CLIENT_SECRET', process.env.GOOGLE_CLIENT_SECRET);
+alert('GOOGLE_REDIRECT_URI', process.env.GOOGLE_REDIRECT_URI);
+alert('GOOGLE_REFRESH_TOKEN', process.env.GOOGLE_REFRESH_TOKEN);
+
 // Enable CORS for a specific origin (your frontend domain)
 app.use(cors({
   origin: 'https://davidkentdeveloper.com',  // Allow requests only from this domain
