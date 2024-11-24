@@ -1,4 +1,14 @@
 // mailer.js (Frontend)
+function openEmailWindow() {
+  const emailModal = document.getElementById('emailModal');
+  emailModal.style.display = 'block'; // Make modal visible
+  emailModal.classList.add('show'); // Add the 'show' class for the transition
+}
+
+function closeEmailWindow() {
+  document.getElementById('emailModal').style.display = 'none';
+}
+
 function sendEmail(event) {
   event.preventDefault(); // Prevent form submission from reloading the page
 
@@ -17,7 +27,7 @@ function sendEmail(event) {
   }
 
   // Sending email data to the server
-  fetch('https://your-backend-url/send-email', {
+  fetch('https://website-portfolio-dl6i.onrender.com/send-email', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -31,21 +41,6 @@ function sendEmail(event) {
     .catch(error => {
       alert('Email failed to send');
     });
-}
-
-function openEmailWindow() {
-  const emailModal = document.getElementById('emailModal');
-  emailModal.style.display = 'block'; // Make modal visible
-
-  // Force a reflow/repaint to ensure the browser processes the style change
-  // before adding the 'show' class for the transition
-  emailModal.offsetHeight;  // This triggers a reflow, forcing the styles to update.
-
-  emailModal.classList.add('show'); // Add the 'show' class for the transition
-}
-
-function closeEmailWindow() {
-  document.getElementById('emailModal').style.display = 'none';
 }
 
 // A simple email validation regex
