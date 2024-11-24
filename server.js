@@ -1,4 +1,3 @@
-//server.js
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
@@ -11,7 +10,7 @@ const port = process.env.PORT || 10000;
 
 // Enable CORS for all routes (update with your frontend URL)
 app.use(cors({
-  origin: 'https://davidkentdeveloper.com',  // Replace with your actual frontend URL
+  origin: ['https://davidkentdeveloper.com', 'http://localhost:3000'],  // Allow both production and local domains
   credentials: true,  // Allow cookies and headers (including CSRF token)
 }));
 
@@ -23,19 +22,24 @@ const csrfProtection = csrf({
   cookie: {
     httpOnly: true,  // Make sure the cookie is only accessible via HTTP (not JavaScript)
     secure: process.env.NODE_ENV === 'production',  // Use secure cookies in production
-    sameSite: 'Strict',
+    sameSite: 'Strict',  // Restrict how cookies are sent with cross-site requests
   },
 });
 
 // Set up a simple route to send the CSRF token
 app.get('/csrf-token', csrfProtection, (req, res) => {
-  alert('Generated CSRF token:', req.csrfToken());
-  res.json({ csrfToken: req.csrfToken() });
+  console.log('Received CSRF token request');
+  res.json({ csrfToken: req.csrfToken() });  // Sends the CSRF token in the response
 });
 
 // POST route for sending email
 app.post('/send-email', csrfProtection, async (req, res) => {
   const { sender, subject, message } = req.body;
+
+  // Simple validation of input fields to ensure they are not empty
+  if (!sender || !subject || !message) {
+    return res.status(400).json({ message: 'Please fill in all fields' });
+  }
 
   // Set up nodemailer transporter using Gmail's service
   const transporter = nodemailer.createTransport({
@@ -49,7 +53,7 @@ app.post('/send-email', csrfProtection, async (req, res) => {
   // Email options (recipient, subject, text)
   const mailOptions = {
     from: sender,  // Sender's email (taken from form input)
-    to: 'dkintxprof@gmail.com',
+    to: 'dkintxprof@gmail.com',  // Replace with actual recipient's email
     subject: subject,
     text: message,
   };

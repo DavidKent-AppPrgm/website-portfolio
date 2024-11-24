@@ -2,9 +2,12 @@
 function openEmailWindow() {
   const emailModal = document.getElementById('emailModal');
   emailModal.style.display = 'block'; // Make modal visible
-  setTimeout(() => {
-    emailModal.classList.add('show'); // Add the show class after a slight delay for transition
-  }, 10);
+
+  // Force a reflow/repaint to ensure the browser processes the style change
+  // before adding the 'show' class for the transition
+  emailModal.offsetHeight;  // This triggers a reflow, forcing the styles to update.
+
+  emailModal.classList.add('show'); // Add the 'show' class for the transition
 }
 
 function closeEmailWindow() {
@@ -29,24 +32,26 @@ async function sendEmail(event) {
   }
 
   // Get the CSRF token from the server to include it in the request headers
-  const csrfResponse = await fetch('/csrf-token', {
-    credentials: 'include',  // Ensure credentials are included in the request
+  const csrfResponse = await fetch('https://website-portfolio-dl6i.onrender.com/csrf-token', {  // Use full URL here
+    credentials: 'include',  // Ensure credentials (cookies) are included in the request
   });
+
   if (!csrfResponse.ok) {
     alert('Failed to get CSRF token');
     return;
   }
+
   const csrfData = await csrfResponse.json();
   const csrfToken = csrfData.csrfToken;
 
   alert('Email sending...');
 
   // Make a POST request to the server to send the email
-  fetch('/send-email', {
+  fetch('https://website-portfolio-dl6i.onrender.com/send-email', {  // Use full URL here as well
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'CSRF-Token': csrfToken, // Include the CSRF token in the request header
+      'CSRF-Token': csrfToken,  // Include the CSRF token in the request header
     },
     body: JSON.stringify({
       sender: sender,
