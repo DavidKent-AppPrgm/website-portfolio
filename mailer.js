@@ -35,12 +35,10 @@ async function sendEmail(event) {
   const csrfResponse = await fetch('https://website-portfolio-dl6i.onrender.com/csrf-token', {  // Use full URL here
     credentials: 'include',  // Ensure credentials (cookies) are included in the request
   });
-
   if (!csrfResponse.ok) {
     alert('Failed to get CSRF token');
     return;
   }
-
   const csrfData = await csrfResponse.json();
   const csrfToken = csrfData.csrfToken;
 
