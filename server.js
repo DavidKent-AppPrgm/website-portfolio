@@ -1,6 +1,9 @@
 //server.js
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 10000;
 
 const oAuth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
@@ -79,3 +82,8 @@ function validateEmail(email) {
   const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   return re.test(email);
 }
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
