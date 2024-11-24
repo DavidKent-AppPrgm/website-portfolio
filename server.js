@@ -12,6 +12,11 @@ alert('GOOGLE_CLIENT_SECRET', process.env.GOOGLE_CLIENT_SECRET);
 alert('GOOGLE_REDIRECT_URI', process.env.GOOGLE_REDIRECT_URI);
 alert('GOOGLE_REFRESH_TOKEN', process.env.GOOGLE_REFRESH_TOKEN);
 
+console.log('GOOGLE_CLIENT_ID', process.env.GOOGLE_CLIENT_ID);
+console.log('GOOGLE_CLIENT_SECRET', process.env.GOOGLE_CLIENT_SECRET);
+console.log('GOOGLE_REDIRECT_URI', process.env.GOOGLE_REDIRECT_URI);
+console.log('GOOGLE_REFRESH_TOKEN', process.env.GOOGLE_REFRESH_TOKEN);
+
 // Enable CORS for a specific origin (your frontend domain)
 app.use(cors({
   origin: 'https://davidkentdeveloper.com',  // Allow requests only from this domain
