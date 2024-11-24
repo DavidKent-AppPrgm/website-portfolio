@@ -81,10 +81,11 @@ app.post('/send-email', csrfProtection, async (req, res) => {  // Apply CSRF pro
   try {
     const transporter = await createTransporter();
     const mailOptions = {
-      from: sender,
+      from: process.env.GMAIL_USER,
       to: process.env.GMAIL_USER,
       subject: subject,
       text: message,
+      replyTo: sender,              // The user's email will be used as the "Reply-To"
     };
 
     // Send the email using Nodemailer

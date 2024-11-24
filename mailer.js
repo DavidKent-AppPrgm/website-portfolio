@@ -14,16 +14,14 @@ function closeEmailWindow() {
 async function sendEmail(event) {
   event.preventDefault(); // Prevent form submission from reloading the page
 
-  const sender = document.getElementById('sender').value;
-  const subject = document.getElementById('subject').value;
-  const message = document.getElementById('message').value;
+  const sender = document.getElementById('sender').value; // User's email
+  const subject = document.getElementById('subject').value; // Subject of email
+  const message = document.getElementById('message').value; // Message content
 
-  // Get the CSRF token from the server
+  // Get the CSRF token from the server to include it in the request headers
   const csrfResponse = await fetch('/csrf-token');
   const csrfData = await csrfResponse.json();
   const csrfToken = csrfData.csrfToken;
-
-  alert("sendEmail triggered 2");
 
   // Make a POST request to the server to send the email
   fetch('/send-email', {
@@ -50,5 +48,5 @@ async function sendEmail(event) {
     alert('Error sending email');
   });
 
-  closeEmailWindow();
+  closeEmailWindow(); // Close modal after sending email
 }
