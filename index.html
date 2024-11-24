@@ -7,7 +7,7 @@
     <title>David Kent</title>
     <link rel="icon" type="image/x-icon" href="" />
     <link rel="stylesheet" href="styles.css" />
-    <script src="mailer.js?v=1"></script>
+    <script src="mailer.js"></script>
   </head>
 
   <body>
@@ -37,7 +37,7 @@
       <div id="emailModal" class="email-modal">
         <div class="email-modal-content">
           <span class="email-close-btn" onclick="closeEmailWindow()">&times;</span>
-          <form id="emailForm">
+          <form id="emailForm" onsubmit="sendEmail(event)">
             <label for="recipient">To:</label>
             <input type="email" id="recipient" value="dkintxprof@gmail.com" readonly><br><br>
             <label for="sender">From:</label>
@@ -46,7 +46,7 @@
             <input type="text" id="subject" placeholder="Subject"><br><br>
             <label for="message">Message:</label><br>
             <textarea id="message" rows="4" cols="30" placeholder="Write your message..."></textarea><br><br>
-            <button type="submit" onclick="sendEmail(event)">Send</button>
+            <button type="submit">Send</button>
           </form>
         </div>
       </div>

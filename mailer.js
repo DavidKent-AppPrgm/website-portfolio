@@ -18,12 +18,26 @@ async function sendEmail(event) {
   const subject = document.getElementById('subject').value; // Subject of email
   const message = document.getElementById('message').value; // Message content
 
+  if (!sender || !validateEmail(sender)) {
+    alert('Please enter a valid From email');
+    return;
+  }
+
+  if (!subject || !message) {
+    alert("Please fill in both the subject and message.");
+    return;
+  }
+
   // Get the CSRF token from the server to include it in the request headers
   const csrfResponse = await fetch('/csrf-token');
+  if (!csrfResponse.ok) {
+    alert('Failed to get CSRF token');
+    return;
+  }
   const csrfData = await csrfResponse.json();
   const csrfToken = csrfData.csrfToken;
 
-  alert('Email sending');
+  alert('Email sending...');
 
   // Make a POST request to the server to send the email
   fetch('/send-email', {
@@ -51,4 +65,10 @@ async function sendEmail(event) {
   });
 
   closeEmailWindow(); // Close modal after sending email
+}
+
+// A simple email validation regex
+function validateEmail(email) {
+  const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  return re.test(email);
 }
