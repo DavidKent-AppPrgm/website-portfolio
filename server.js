@@ -23,12 +23,13 @@ const csrfProtection = csrf({
   cookie: {
     httpOnly: true,  // Make sure the cookie is only accessible via HTTP (not JavaScript)
     secure: process.env.NODE_ENV === 'production',  // Use secure cookies in production
-    sameSite: 'Strict',  // or 'Lax', depending on your needs
+    sameSite: 'Strict',
   },
 });
 
 // Set up a simple route to send the CSRF token
 app.get('/csrf-token', csrfProtection, (req, res) => {
+  alert('Generated CSRF token:', req.csrfToken());
   res.json({ csrfToken: req.csrfToken() });
 });
 
@@ -40,15 +41,15 @@ app.post('/send-email', csrfProtection, async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',  // Gmail as the email service
     auth: {
-      user: process.env.GMAIL_USER,  // Use environment variable for email
-      pass: process.env.GMAIL_PASS,  // Use environment variable for password
+      user: process.env.GMAIL_USER,  // Environment variable for email
+      pass: process.env.GMAIL_PASS,  // Environment variable for password
     },
   });
 
   // Email options (recipient, subject, text)
   const mailOptions = {
     from: sender,  // Sender's email (taken from form input)
-    to: 'dkintxprof@gmail.com',  // Replace with the recipient's email
+    to: 'dkintxprof@gmail.com',
     subject: subject,
     text: message,
   };

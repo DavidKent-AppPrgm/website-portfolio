@@ -29,7 +29,9 @@ async function sendEmail(event) {
   }
 
   // Get the CSRF token from the server to include it in the request headers
-  const csrfResponse = await fetch('/csrf-token');
+  const csrfResponse = await fetch('/csrf-token', {
+    credentials: 'include',  // Ensure credentials are included in the request
+  });
   if (!csrfResponse.ok) {
     alert('Failed to get CSRF token');
     return;
