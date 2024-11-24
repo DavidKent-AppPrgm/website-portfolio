@@ -26,6 +26,8 @@ const csrfProtection = csrf({
   },
 });
 
+app.use(csrfProtection);
+
 // Set up a simple route to send the CSRF token
 app.get('/csrf-token', csrfProtection, (req, res) => {
   console.log('Received CSRF token request');
