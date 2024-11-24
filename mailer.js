@@ -33,6 +33,21 @@ function sendEmail(event) {
     });
 }
 
+function openEmailWindow() {
+  const emailModal = document.getElementById('emailModal');
+  emailModal.style.display = 'block'; // Make modal visible
+
+  // Force a reflow/repaint to ensure the browser processes the style change
+  // before adding the 'show' class for the transition
+  emailModal.offsetHeight;  // This triggers a reflow, forcing the styles to update.
+
+  emailModal.classList.add('show'); // Add the 'show' class for the transition
+}
+
+function closeEmailWindow() {
+  document.getElementById('emailModal').style.display = 'none';
+}
+
 // A simple email validation regex
 function validateEmail(email) {
   const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
