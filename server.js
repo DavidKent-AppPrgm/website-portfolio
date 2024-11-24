@@ -2,10 +2,19 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
+const cors = require('cors');  // Import CORS middleware
+
 const app = express();
 const port = process.env.PORT || 10000;
 
-app.use(express.json()); // To parse JSON request body
+// Enable CORS for a specific origin (your frontend domain)
+app.use(cors({
+  origin: 'https://davidkentdeveloper.com',  // Allow requests only from this domain
+  methods: ['GET', 'POST'],  // Allow GET and POST methods
+  allowedHeaders: ['Content-Type'],  // Allow specific headers
+}));
+
+app.use(express.json());  // To parse JSON request body
 
 // Set up the OAuth2 client
 const oAuth2Client = new google.auth.OAuth2(
