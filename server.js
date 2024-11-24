@@ -20,9 +20,9 @@ app.use(bodyParser.json());
 // CSRF protection setup (with cookie settings)
 const csrfProtection = csrf({
   cookie: {
-    httpOnly: true,  // Make sure the cookie is only accessible via HTTP (not JavaScript)
+    httpOnly: true,  // Prevents access from JavaScript
     secure: process.env.NODE_ENV === 'production',  // Use secure cookies in production
-    sameSite: 'Strict',  // Restrict how cookies are sent with cross-site requests
+    sameSite: 'Lax',
   },
 });
 
