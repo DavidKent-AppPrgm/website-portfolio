@@ -22,7 +22,7 @@ const csrfProtection = csrf({
   cookie: {
     httpOnly: true,  // Prevents access from JavaScript
     secure: process.env.NODE_ENV === 'production',  // Use secure cookies in production
-    sameSite: 'Lax',
+    sameSite: 'None',
   },
 });
 
