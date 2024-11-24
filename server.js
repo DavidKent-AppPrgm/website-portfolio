@@ -37,7 +37,7 @@ async function sendEmail(event) {
       service: 'gmail',
       auth: {
         type: 'OAuth2',
-        user: 'dkintxprof@gmail.com',
+        user: process.env.GMAIL_USER,
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
@@ -46,8 +46,8 @@ async function sendEmail(event) {
     });
 
     const mailOptions = {
-      from: sender,  // Sender's email (taken from form input)
-      to: 'dkintxprof@gmail.com',
+      from: process.env.GMAIL_USER,
+      to: process.env.GMAIL_USER,
       subject: subject,
       text: message,
     };
