@@ -1,0 +1,17 @@
+{
+  "name": "website-portfolio",
+  "version": "1.0.0",
+  "main": "mouseglow.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "googleapis": "^144.0.0",
+    "nodemailer": "^6.9.16"
+  }
+}
