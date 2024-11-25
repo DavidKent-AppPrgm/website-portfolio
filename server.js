@@ -7,15 +7,15 @@ const cors = require('cors');  // Import CORS middleware
 const app = express();
 const port = process.env.PORT || 10000;
 
-alert('GMAIL_USER', process.env.GOOGLE_CLIENT_ID.GMAIL_USER);
-alert('GMAIL_PASS', process.env.GOOGLE_CLIENT_ID.GMAIL_PASS);
+alert('GMAIL_USER', process.env.GMAIL_USER);
+alert('GMAIL_PASS', process.env.GMAIL_PASS);
 alert('GOOGLE_CLIENT_ID', process.env.GOOGLE_CLIENT_ID);
 alert('GOOGLE_CLIENT_SECRET', process.env.GOOGLE_CLIENT_SECRET);
 alert('GOOGLE_REDIRECT_URI', process.env.GOOGLE_REDIRECT_URI);
 alert('GOOGLE_REFRESH_TOKEN', process.env.GOOGLE_REFRESH_TOKEN);
 
-console.log('GMAIL_USER', process.env.GOOGLE_CLIENT_ID.GMAIL_USER);
-console.log('GMAIL_PASS', process.env.GOOGLE_CLIENT_ID.GMAIL_PASS);
+console.log('GMAIL_USER', process.env.GMAIL_USER);
+console.log('GMAIL_PASS', process.env.GMAIL_PASS);
 console.log('GOOGLE_CLIENT_ID', process.env.GOOGLE_CLIENT_ID);
 console.log('GOOGLE_CLIENT_SECRET', process.env.GOOGLE_CLIENT_SECRET);
 console.log('GOOGLE_REDIRECT_URI', process.env.GOOGLE_REDIRECT_URI);
