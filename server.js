@@ -56,7 +56,7 @@ app.post('/send-email', async (req, res) => {
     });
 
     const mailOptions = {
-      from: sender,
+      from: process.env.GMAIL_USER,
       to: process.env.GMAIL_USER,
       subject: subject,
       text: message,
