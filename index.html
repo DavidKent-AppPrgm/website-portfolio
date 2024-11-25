@@ -28,20 +28,22 @@
         <button onclick="window.open('https://www.linkedin.com/in/david-kent-3b6274172', '_blank')" title="David Kent's LinkedIn Page" style="background-color:transparent;border:none;">
           <img src="LinkedIn_logo_initials.png" alt="LinkedIn" style="width: 40px; height: 40px;">
         </button>
-        <!---
-        <button
-          onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=dkintxprof@gmail.com&su=Hello%20David&body=Hi%20David,%20I%20wanted%20to%20reach%20out%20to%20you.', '_blank')"
-          title="David Kent's Email"
-          style="background-color:transparent;border:none;">
-          <img src="Gmail_Icon.png" alt="Gmail" style="width: 40px; height: 40px;">
-        </button>
-        --->
-        <button
-          onclick="window.open('mailto:dkintxprof@gmail.com?subject=Hello%20David&body=Hi%20David,%20I%20wanted%20to%20reach%20out%20to%20you.', '_blank')"
-          title="David Kent's Email"
-          style="background-color:transparent;border:none;">
-          <img src="Gmail_Icon.png" alt="Gmail" style="width: 40px; height: 40px;">
-        </button>
+        <div class="desktop-view">
+          <button
+            onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=dkintxprof@gmail.com&su=Hello%20David&body=Hi%20David,%20I%20wanted%20to%20reach%20out%20to%20you.', '_blank')"
+            title="David Kent's Email"
+            style="background-color:transparent;border:none;">
+            <img src="Gmail_Icon.png" alt="Gmail" style="width: 40px; height: 40px;">
+          </button>
+        </div>
+        <div class="mobile-view">
+          <button
+            onclick="window.open('mailto:dkintxprof@gmail.com?subject=Hello%20David&body=Hi%20David,%20I%20wanted%20to%20reach%20out%20to%20you.', '_blank')"
+            title="David Kent's Email"
+            style="background-color:transparent;border:none;">
+            <img src="Gmail_Icon.png" alt="Gmail" style="width: 40px; height: 40px;">
+          </button>
+        </div>
       </div>
 
       <!-- Email Modal
